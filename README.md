@@ -1,0 +1,2 @@
+# Design-Token
+ "Design Token Showcase: A Demonstration of Scalable Design Systems"  This website serves as a practical showcase of how design tokens and variables can be effectively utilized to create scalable and consistent design systems. It highlights the application of color palettes, font sizes, spacing, and other design elements through dynamic tokens, offering a clear, interactive example of how these principles ensure adaptability, efficiency, and uniformity across digital products.
