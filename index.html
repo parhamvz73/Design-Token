@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Section with Dynamic Navigation</title>
+  <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file for all styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Arial&family=Roboto&family=Raleway&family=Open+Sans&family=Lato&family=Montserrat&family=Oswald&family=Source+Sans+Pro&family=Roboto+Condensed&family=Bebas+Neue&family=Barlow&display=swap" rel="stylesheet">
+  <script src="iro.min.js"></script> <!-- Color picker library -->
+  <script src="chroma.min.js"></script> <!-- Chroma.js library for harmony calculations -->
+  <script src="script.js" defer></script> <!-- Link to the JS file for all functionality -->
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="cards-container" id="cards-container">
+  <!-- Card Container on the left -->
+    
+      <div class="card">
+        
+
+        <img src="assets/card1.png" alt="Card Image" class="card-image">
+
+        
+
+        <div class="card-content">
+          
+          <div class="hide-spacers">
+          <!-- Spacer for left padding -->
+          <div class="spacer1"></div></div>
+        
+          <div class="card-inner-content">
+            <div class="hide-spacers">
+            <!-- Spacer box after the image -->
+            <div class="spacer2"></div></div>
+            <h3 class="card-title">Card Headline</h3>
+            <div class="review-stars">
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star filled">★</span>
+              <span class="star half-filled">★</span>
+            </div>
+            <div class="hide-spacers">
+            <!-- Spacer between headline and text -->
+            <div class="spacer2"></div></div>
+        
+            <p class="card-text">This is the body text of the card, describing the content.</p>
+            <div class="hide-spacers">
+            <!-- Spacer between text and list -->
+            <div class="spacer"></div></div>
+        
+            <ul class="card-list">
+              <li>Bullet Point 1</li>
+              <li>Bullet Point 2</li>
+              <li>Bullet Point 3</li>
+            </ul>
+            <div class="hide-spacers">
+            <!-- Spacer between list and link container -->
+            <div class="spacer2"></div> </div>
+        
+            <div class="card-link-container">
+              <a href="#" class="card-link">
+                <img src="assets/link-icon.png" alt="Link Icon" class="link-icon">
+                Visit Website
+              </a>
+            </div>
+            <hr class="card-divider">
+            <div class="hide-spacers">
+            <!-- Spacer between divider and button -->
+            <div class="spacer2"></div> </div>
+        
+            <button class="card-button">Select</button>
+            <div class="hide-spacers">
+            <!-- Spacer after the button -->
+            <div class="spacer2"></div> </div>
+          </div>
+          <div class="hide-spacers">
+          <!-- Spacer for right padding -->
+          <div class="spacer1"></div> </div>
+        </div>
+        
+      </div>
+    
+  </div>
+    <!-- Stream Section on the right -->
+    <div class="stream" id="stream">
+      <!-- Sticky Tab Navigation -->
+      <div class="stream-nav" id="stream-nav"></div>
+
+      <!-- Colors Section -->
+      <section class="stream-section highlight" id="colors">
+        
+        <h2>Colors</h2>
+        <!-- Selected Color Label with Color Box -->
+        <label>Selected Color: <div id="selected-color-box" class="color-box" title="Click to change color">
+          <div class="icon-container">
+            <img src="assets/bucket.png" alt="Bucket Icon" class="hover-icon">
+          </div>
+        </div></label>
+
+        <!-- Popover for Color Picker -->
+        <div id="color-popover" class="color-popover">
+          <div id="color-wheel" class="color-wheel"></div>
+          <button id="select-color-button" disabled>Select Color</button>
+        </div>
+
+        <!-- Harmony Boxes -->
+        
+          <h3>Main Color</h3>
+          <div class="harmonyBox" id="harmonyBox1" data-tooltip="This is your main color!"></div>
+          <hr class="divider">
+          <h3>First Triadic Color</h3>
+          <div class="harmonyBox" id="harmonyBox2" data-tooltip="This is your first triadic color!"></div>
+          <hr class="divider">
+          <h3>Second Triadic Color</h3>
+          <div class="harmonyBox" id="harmonyBox3" data-tooltip="This is your second triadic color!"></div>
+          <hr class="divider">
+
+        <!-- Primary Color Palette -->
+        <h3>Primary Color Palette</h3>
+        <div class="color-row" id="primary-color-shades"><div class="color-box placeholder visible" data-tooltip="This is your primary color shades!"></div></div>
+        <hr class="divider">
+        <!-- Secondary Color Palette -->
+        <h3>Secondary Color Palette</h3>
+        <div class="color-row" id="secondary-color-shades"><div class="color-box placeholder visible" data-tooltip="This is your secondary color shades!"></div></div>
+        <hr class="divider">
+        <!-- Tertiary Color Palette -->
+        <h3>Tertiary Color Palette</h3>
+        <div class="color-row" id="tertiary-color-shades"><div class="color-box placeholder visible" data-tooltip="This is your tertiary color shades!"></div></div>
+        <hr class="divider">
+        <!-- Grayscale Section -->
+        <h3>Grayscale Palette</h3>
+        <div class="color-row" id="grayscale-shades"> <div class="color-box placeholder visible" data-tooltip="This is your gray scale color!"></div></div>
+        <hr class="divider">
+        <!-- Informative, Success, Warning, and Error sections -->
+        <h3>Informative Palette</h3>
+        <div class="color-row">
+          <div class="color-box placeholder visible"></div>
+          <div class="color-box" id="informative-color" data-tooltip="This is your informative color!"></div>
+        </div>
+        <hr class="divider">
+        <h3>Success Palette</h3>
+        <div class="color-row">
+          <div class="color-box placeholder visible"></div>
+          <div class="color-box" id="success-color" data-tooltip="This is your success color!"></div>
+        </div>
+        <hr class="divider">
+        <h3>Warning Palette</h3>
+        <div class="color-row">
+          <div class="color-box placeholder visible"></div>
+          <div class="color-box" id="warning-color" data-tooltip="This is your warning color!"></div>
+        </div>
+        <hr class="divider">
+        <h3>Error Palette</h3>
+        <div class="color-row">
+          <div class="color-box placeholder visible"></div>
+          <div class="color-box" id="error-color" data-tooltip="This is your error color!"></div>
+        </div>
+      </section>
+      
+      <section class="stream-section highlight" id="fonts">
+        <h2>Fonts</h2>
+        <div class="custom-dropdown">
+          <button id="dropdownBtn">Choose a font</button>
+          <ul class="dropdown-menu" id="dropdownMenu">
+            <li data-font="Arial" style="font-family: Arial;">Arial</li>
+            <li data-font="'Roboto'" style="font-family: 'Roboto';">Roboto</li>
+            <li data-font="'Raleway'" style="font-family: 'Raleway';">Raleway</li>
+            <li data-font="'Open Sans'" style="font-family: 'Open Sans';">Open Sans</li>
+            <li data-font="'Lato'" style="font-family: 'Lato';">Lato</li>
+            <li data-font="'Montserrat'" style="font-family: 'Montserrat';">Montserrat</li>
+            <li data-font="'Oswald'" style="font-family: 'Oswald';">Oswald</li>
+            <li data-font="'Source Sans Pro'" style="font-family: 'Source Sans Pro';">Source Sans Pro</li>
+            <li data-font="'Roboto Condensed'" style="font-family: 'Roboto Condensed';">Roboto Condensed</li>
+            <li data-font="'Bebas Neue'" style="font-family: 'Bebas Neue';">Bebas Neue</li>
+            <li data-font="'Barlow'" style="font-family: 'Barlow';">Barlow</li>
+          </ul>
+        </div>
+      </section>
+      <section class="stream-section highlight" id="prop">
+        <h2>Properties</h2>
+      <!-- Checkbox to toggle space guides -->
+      <label for="showSpaceGuides">Show Space Guides:</label>
+      <input type="checkbox" id="showSpaceGuides" />
+      <!-- Add toggle button for horizontal card layout -->
+      <label for="cardLayoutToggle">Horizontal Card:</label>
+      <input type="checkbox" id="cardLayoutToggle" />
+
+      <div class="container"></div>
+        <!-- Slider to set the atom value -->
+      <div class="atom-control">
+      <label for="atom-slider">Set Atom (2-7):</label>
+      <input type="range" id="atom-slider" min="2" max="7" value="4">
+      <span id="atom-value">4</span>
+      </div>
+      <div class="card-quantity-control">
+        <label for="card-quantity">Number of Cards:</label>
+        <input type="number" id="card-quantity" min="1" value="1">
+      </div>
+      
+    </section>
+       
+    </div>
+    </div>
+  </div>
+  <div class="toast-container" id="toast-container"></div>
+<!-- Modal Overlay structure -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close-button" id="close-button">×</button>
+    <!-- Modal content goes here -->
+    <h2>Modal Title</h2>
+    <p>This is the modal content.</p>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,863 @@
+:root {
+  /* Base Tokens */
+  --base-unit: 4px;
+  --base-spacing-multiplier: 1.1;
+  --base-size-multiplier: 2;
+  --base-line-height-multiplier: 1.25;
+  --base-font-size: 12px;
+  --base-border-radius: 2px;
+  --base-shadow-offset: 1px;
+
+  /* Core Tokens */
+  --spacing-xs: calc(var(--base-unit) * 1);
+  --spacing-sm: calc(var(--spacing-xs) * var(--base-spacing-multiplier));
+  --spacing-md: calc(var(--spacing-sm) * var(--base-spacing-multiplier));
+  --spacing-lg: calc(var(--spacing-md) * var(--base-spacing-multiplier));
+
+  --font-size-xs: calc(var(--base-font-size));
+  --font-size-sm: calc(var(--font-size-xs) * 1.2);
+  --font-size-md: calc(var(--font-size-sm) * 1.25);
+  --font-size-lg: calc(var(--font-size-md) * 1.25);
+
+  --line-height-xs: calc(var(--font-size-xs) * var(--base-line-height-multiplier));
+  --line-height-sm: calc(var(--font-size-sm) * var(--base-line-height-multiplier));
+  --line-height-md: calc(var(--font-size-md) * var(--base-line-height-multiplier));
+
+  --radius-xs: calc(var(--base-border-radius));
+  --radius-sm: calc(var(--radius-xs) * 1.5);
+  --radius-md: calc(var(--radius-xs) * 2);
+
+  --shadow-sm: 0 var(--base-shadow-offset) calc(var(--base-shadow-offset) * 2) rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 calc(var(--base-shadow-offset) * 2) calc(var(--base-shadow-offset) * 4) rgba(0, 0, 0, 0.2);
+
+  /* Component-Specific Tokens for Card */
+  --card-padding: var(--spacing-md);
+  --card-border-radius: var(--radius-md);
+  --card-shadow: var(--shadow-md);
+
+  --card-image-size: calc(var(--base-unit) * var(--base-size-multiplier) * 10);
+  --card-headline-font-size: var(--font-size-lg);
+  --card-headline-line-height: var(--line-height-md);
+  --card-body-font-size: var(--font-size-md);
+  --card-body-line-height: var(--line-height-md);
+
+  --card-bullet-font-size: var(--font-size-sm);
+  --card-bullet-spacing: var(--spacing-xs);
+
+  --card-link-font-size: var(--font-size-sm);
+  --card-link-color: #007acc;
+
+  --card-button-font-size: var(--font-size-sm);
+  --card-button-padding: var(--spacing-sm);
+  --card-button-radius: var(--radius-sm);
+  --card-button-background: #007acc;
+  --card-button-color: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h2{
+  font-weight: 200;
+  color: #ffffff;
+}
+h3, h4{
+  font-weight: 100;
+  font-size: medium;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  color: #cecece; /* Dark gray font color */ 
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('assets/bg.png'); /* Replace 'bg.jpg' with your actual image file name and extension */
+  background-size: cover; /* Ensures the image covers the whole screen */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.stream {
+  width: 360px;
+  height: 100vh;
+  margin-right: 84px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-top: 10vh;
+  padding-bottom: 10vh;
+}
+
+
+/* Scrollbar Styles */
+.stream::-webkit-scrollbar {
+  width: 2px; /* Width of the scrollbar */
+}
+
+.stream::-webkit-scrollbar-track {
+  background: #00000000; /* Background of the scrollbar track */
+  border-radius: 10px;
+}
+
+.stream::-webkit-scrollbar-thumb {
+  background-color: #838383; /* Scrollbar color */
+  border-radius: 10px;
+  border: 0px solid #ffffff00; /* Adds space around the thumb */
+}
+
+.stream::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color on hover */
+}
+
+.stream-nav {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px); /* Blurs the background behind the element */
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid rgba(124, 124, 124, 0.3); /* Light border to enhance glassy look */
+  box-sizing: border-box;
+  z-index: 999;
+  font-size:18px;
+  border-radius: 24px;
+}
+.nav-link {
+  padding-bottom: 4px;
+  color: #e6e6e6;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(61, 61, 61, 0);
+}
+.nav-link:hover{
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+}
+.stream-section {
+  background: rgba(255, 255, 255, 0.2); /* Slightly increased transparency */
+  backdrop-filter: blur(15px) brightness(1.2); /* Increased blur and brightness */
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 24px;
+  outline: 2px solid rgba(255, 255, 255, 0.3); /* Light border for enhanced glass effect */
+  outline-offset: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow to create a floating effect */
+  position: relative; /* Ensure sections have proper stacking context */
+  z-index: 1; /* Lower z-index to ensure dropdown appears above */
+}
+
+
+.color-wheel {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.harmony-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.harmonyButton {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+
+.harmonyBox {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  position: relative; /* Required for tooltip positioning */
+}
+.harmonyBox:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect on hover */
+  }
+.harmonyBox[data-tooltip]:hover::after {
+    content: attr(data-tooltip); /* Use the data-tooltip attribute for the content */
+    position: absolute;
+    bottom: 100%; /* Position above the element */
+    left: 250%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for tooltip */
+    color: white; /* White text color */
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    white-space: nowrap; /* Prevent text wrapping */
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  
+  .harmonyBox[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .harmonyBox[data-tooltip]:hover::before {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* Same as tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent; /* Triangular arrow effect */
+    border-top-color: rgba(0, 0, 0, 0.8); /* Match tooltip background color */
+    z-index: 10;
+  }
+.cards-container {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  gap: 20px; /* Space between cards */
+  padding: 20px;
+  justify-content: flex-start; /* Align cards to the left */
+  align-items: flex-start; /* Align cards to the top */
+  background-color: #28a745; /* Background color */
+  height: 90vh; /* Set a fixed height */
+  overflow: hidden; /* Prevent scrolling and ensure content stays within bounds */
+  border-radius: 8px; /* Optional: Add rounded corners for better aesthetics */
+  box-sizing: border-box; /* Ensure padding is included in total height/width */
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow multiple cards to wrap */
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 100%; /* Ensure the card container doesn't exceed the parent width */
+  max-height: 100%; /* Ensure it doesn't exceed the parent height */
+  background-color: #555;
+  flex-grow: 1; /* Allow it to grow to fill available space */
+}
+
+.card {
+  width: 150px;
+  flex-grow: 1; /* Allow card to grow proportionally if needed */
+  max-width: calc(100% - 40px); /* Ensure it doesn't exceed container width minus gaps */
+  height: auto; /* Allow flexible height but constrained by content */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  overflow: hidden;
+  margin: 10px; /* Add margin between cards */
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between; /* Distribute spacer boxes evenly */
+  align-items: flex-start;
+}
+
+.card-image {
+  width: 100%;
+  height: 150px; /* Fixed height for images */
+  object-fit: cover; /* Maintain aspect ratio and crop */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+
+
+.card-title {
+  font-size: var(--card-headline-font-size);
+  line-height: var(--card-headline-line-height);
+  color: #555;
+}
+
+.card-text {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+  color: #555;
+}
+
+.card-list {
+  font-size: var(--font-size-sm);
+  line-height: var(--spacing-xs);
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #555;
+}
+
+.card-divider {
+  border: none;
+  border-top: 1px solid #eee;
+}
+.divider {
+  border: none;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100%;
+}
+
+.card-button {
+  width: 100%;
+  padding: var(--spacing-sm);
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+/* Style for the link container inside the card */
+.card-link-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-link {
+  text-decoration: none;
+  color: #000; /* Default black color */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.card-link:hover {
+  color: var(--primary-triadic-color, #007acc); /* Use Primary Triadic Color on hover */
+}
+
+/* Style for the icon */
+.link-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+.color-row {
+  display: flex;
+  position: relative;
+  padding-left: 15px;
+}
+.color-box {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    margin-left: -15px; /* Adjust this value for the desired overlap */
+    position: relative; /* Required for tooltip positioning */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth shadow and transform transition */
+  }
+  
+  .color-box:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Shadow effect on hover */
+  }
+  
+  /* Tooltip styles remain completely separate */
+  .color-box[data-tooltip]:hover::after {
+      content: attr(data-tooltip); /* Use the data-tooltip attribute for the content */
+      position: absolute;
+      bottom: 100%; /* Position above the element */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.8); /* Dark background for tooltip */
+      color: white; /* White text color */
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      white-space: nowrap; /* Prevent text wrapping */
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  
+  .color-box[data-tooltip]:hover::after {
+      opacity: 1;
+      visibility: visible;
+  }
+  
+  .color-box[data-tooltip]:hover::before {
+      content: "";
+      position: absolute;
+      bottom: 100%; /* Same as tooltip */
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent; /* Triangular arrow effect */
+      border-top-color: rgba(0, 0, 0, 0.8); /* Match tooltip background color */
+      z-index: 10;
+  }
+  
+/* Dropdown button */
+#dropdownBtn {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  font-family: inherit;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  list-style: none;
+  z-index: 9999; /* Ensure it appears above other content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  max-height: 200px; /* Limit height */
+  overflow-y: auto; /* Add a scrollbar if content exceeds height */
+  bottom: 100%; /* Position the dropdown above the button */
+  margin-bottom: 10px; /* Add space between the dropdown and the button */
+}
+
+.custom-dropdown {
+  position: relative; /* Ensure the dropdown is positioned relative to this container */
+  z-index: 9999; /* Ensure it stacks above lower sections */
+}
+
+
+/* Dropdown menu items */
+.dropdown-menu li {
+  padding: 10px 15px;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.3s;
+  z-index: 9999; /* High z-index to ensure it appears on top */
+}
+
+.dropdown-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Show dropdown menu */
+.custom-dropdown.open .dropdown-menu {
+  display: block;
+}
+.dropdown-container {
+  position: relative; /* Ensure the dropdown menu is positioned relative to this container */
+  overflow: visible; /* Allow the dropdown to extend outside the container */
+  z-index: 9999; /* High z-index to ensure it appears on top */
+}
+/* Scrollbar Styles for Dropdown Menu */
+.dropdown-menu::-webkit-scrollbar {
+  width: 2px; /* Width of the scrollbar */
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #00000000; /* Transparent scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #838383; /* Default scrollbar color */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 0px solid #ffffff00; /* Transparent border around the thumb */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+/* For non-WebKit browsers (optional fallback) */
+.dropdown-menu {
+  scrollbar-color: #838383 #00000000; /* Thumb and track colors */
+  scrollbar-width: thin; /* Thin scrollbar */
+}
+
+#selected-color-box {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative; /* Needed to position the bubble */
+}
+
+.hover-icon {
+  position: absolute; /* Allows for precise positioning */
+  top: 50%; /* Center the icon vertically */
+  left: 50%; /* Center the icon horizontally */
+  transform: translate(-50%, -50%); /* Corrects the alignment to the exact center */
+  width: 24px; /* Adjust the size of the icon */
+  height: 24px;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Smoothly fade in and out */
+}
+.icon-container {
+  position: relative; /* Positions the icon relative to its container */
+  display: inline-block; /* Keeps the icon container inline */
+  width: 49px; /* Same width as the color box */
+  height: 49px; /* Same height as the color box */
+  border-radius: 100%; /* Creates a circular shape */
+  pointer-events: none; /* Ensures the icon doesn't block hover events on the color box */
+  background: rgba(0, 0, 0, 0.1); /* Transparent background for glass effect */
+  backdrop-filter: blur(10px); /* Applies blur to the background behind the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Smoothly fade in and out */
+}
+#selected-color-box:hover .hover-icon {
+  opacity: 1; /* Show the icon on hover */
+}
+#selected-color-box:hover .icon-container {
+  opacity: 1;
+}
+/* Small circle bubble in the top-right corner */
+#selected-color-box::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 30px;
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+  border-radius: 50%;
+  transition: width 0.5s ease, padding 0.5s ease, font-size 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0; /* Hide text initially */
+  color: white;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Prevents text overflow */
+  white-space: nowrap;
+}
+
+/* Expanded bubble with text starting from the circle */
+#selected-color-box:hover::after {
+  width: auto;
+  height: auto;
+  padding: 5px 12px;
+  font-size: 12px;
+  content: "Please choose a color";
+  background-color: blue;
+  border-radius: 15px;
+  top: -5px;
+  left: 30px; /* Keeps the bubble in the same place */
+  text-align: right; /* Aligns text to start after the bubble */
+  padding-right: 20px; /* Space for the bubble as the start of the text */
+  transition: width 0.7s ease, padding 0.7s ease, font-size 0.7s ease;
+}
+
+#selected-color-box.hide-bubble::after {
+  display: none;
+}
+/* Popover Styling for the Color Picker */
+.color-popover {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Styling for the select button inside the popover */
+#select-color-button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  display: block;
+}
+
+/* Disabled state for the select button */
+#select-color-button:disabled {
+  background-color: #bbbbbb;
+  cursor: not-allowed;
+  color: #828282;
+}
+
+.stream-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Optional: adds space between each element */
+}
+
+/* Toast bar styling */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+/* Toast Bar styling */
+.toast-bar {
+  position: fixed;
+  top: 20px; /* Adjust as needed */
+  left: -300px; /* Start off-screen to the left */
+  width: 250px; /* Adjust width as needed */
+  background-color: #28a745; /* Success color fallback */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: transform 0.5s ease, left 0.5s ease; /* Add a smooth transition */
+  z-index: 1000;
+}
+
+/* Toast bar visible class for entry */
+.toast-visible {
+  left: 20px; /* Moves the toast into the view */
+}
+
+/* Toast bar hide class for exit */
+.toast-hide {
+  left: 100%; /* Moves the toast out of view to the right */
+}
+
+.toast-success {
+  background-color: var(--success-color); /* Success color from the palette */
+}
+
+.toast-error {
+  background-color: var(--error-color); /* Error color from the palette */
+}
+
+/* Default vertical layout */
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: var(--card-border-radius);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  overflow: hidden;
+  width: auto; /* Optional: ensures content-based sizing */
+  max-width: 400px;
+}
+
+/* Horizontal layout for the card */
+.card.horizontal {
+  flex-direction: row; /* Switch to row for horizontal layout */
+  width: 100%; /* Adjust the width to full */
+  height: auto; /* Adjust height */
+  max-width: 800px;
+  
+}
+
+.card.horizontal .card-image {
+  width: 30%; /* Make the image smaller to fit the layout */
+  height: auto;
+}
+
+.card.horizontal .card-content {
+  
+  flex: 1; /* Make the content take the remaining space */
+}
+
+/* Red spacer boxes for replacing padding/margins */
+.spacer {
+  width: var(--spacing-md);
+  height: var(--spacing-md);
+  background-color: #dd0808d0;
+  color: #eee;
+  display: flex; /* Use flexbox to center the text */
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
+  
+}
+
+/* Display the size inside the box */
+.spacer::before {
+  content: attr(data-size);
+  font-size: calc(attr(data-size px) * 0.7); /* Font size is 70% of box size */
+  position: absolute;
+}
+
+.hide-spacers .spacer,
+.hide-spacers .spacer1, 
+.hide-spacers .spacer2 {
+  opacity: 0; /* Make the spacers invisible */
+  pointer-events: none; /* Prevent any interaction */
+  transition: opacity 0.3s ease; /* Optional smooth transition */
+}
+/* Red spacer boxes for replacing padding/margins */
+.spacer1 {
+  width: var(--spacing-sm);
+  height: var(--spacing-sm);
+  background-color: #08dd08d0;
+  color: #eee;
+  display: flex; /* Use flexbox to center the text */
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Display the size inside the box */
+.spacer1::before {
+  content: attr(data-size);
+  font-size: calc(attr(data-size px) * 0.7); /* Font size is 70% of box size */
+  position: absolute;
+}
+/* Red spacer boxes for replacing padding/margins */
+.spacer2 {
+  width: var(--spacing-xs);
+  height: var(--spacing-xs);
+  background-color: #8108ddd0;
+  color: #eee;
+  display: flex; /* Use flexbox to center the text */
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Display the size inside the box */
+.spacer1::before {
+  content: attr(data-size);
+  font-size: calc(attr(data-size px) * 0.7); /* Font size is 70% of box size */
+  position: absolute;
+}
+
+.card-inner-content {
+  flex: 1; /* Ensure the inner content takes the available space */
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+}
+/* Overlay styles */
+.overlay {
+  display: none; /* Hide by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal box styles */
+.modal {
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: black;
+  text-align: center;
+}
+
+/* Close button styles */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+}
+.stream-section.highlight {
+  animation: highlight 100s ease-out;
+}
+
+.stream-section.highlight {
+  animation: highlight 100s ease-out; /* Increased duration from 0.8s to 1.5s */
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.placeholder.visible {
+  background-color: #e0e0e0; /* Light gray placeholder color */
+  border: 1px dashed #ccc; /* Dashed border for placeholder effect */
+}
+
+/* Hidden state for placeholders */
+.placeholder.hidden {
+  display: none;
+}
+.review-stars {
+  display: flex;
+  gap: 2px; /* Space between stars */
+  margin-top: var(--spacing-xs); /* Adjust spacing from headline */
+}
+
+.star {
+  font-size: var(--font-size-md); /* Adjust size as needed */
+  color: #ccc; /* Default unfilled star color */
+}
+
+.star.filled {
+  color: var(--tertiary-triadic-color, #cccccc); /* Default to Tertiary Triadic Color */
+}
+
+.star.half-filled {
+    /* Fallback for unsupported browsers */
+    color: var(--tertiary-triadic-color, #cccccc); 
+  
+    /* Gradient background */
+    background: linear-gradient(to right, var(--tertiary-triadic-color, #cccccc) 50%, #ccc 50%);
+  
+    /* Standard property for future compatibility */
+    background-clip: text;
+  
+    /* Vendor-prefixed version for current WebKit-based browsers */
+    -webkit-background-clip: text;
+  
+    /* Ensures only the background gradient shows through */
+    -webkit-text-fill-color: transparent;
+  }
+  
